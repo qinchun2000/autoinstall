@@ -23,7 +23,7 @@ def set_mysql():
     if len(ret) >0 :
         print (ret[0].strip())
     
-    cmd = "mysql --connect-expired-password -uroot -p\'"+ret[0].strip() + "\' < /root/install/modify_pass.sql"
+    cmd = "mysql --connect-expired-password -uroot -p\'"+ret[0].strip() + "\' < /root/autoinstall/modify_pass.sql"
     print (cmd) 
     result = subprocess.getstatusoutput(cmd)
     if result[0] != 0:
