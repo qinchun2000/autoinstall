@@ -1,5 +1,14 @@
-# env 
+# prepare env 
 centos7 
+
+install mysql 5.7
+
+install redis 5.0.3 
+
+install c++ develop env 
+
+install jqdatasdk 
+
 # package 
 jsoncpp-src-0.5.0.tar.gz
 
