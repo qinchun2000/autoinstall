@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "$0"  )" && pwd  )"
-
+SRC="/root/package"
 timedatectl set-timezone Asia/Shanghai
 yum install ntpdate -y
 ntpdate -u 1.cn.pool.ntp.org
@@ -52,13 +52,13 @@ $DIR/config.py
 systemctl restart mysqld.service  
 
 
-cd $DIR 
+cd $SRC
 tar zxvf  scons-2.2.0.tar.gz
 cd scons-2.2.0
 sudo python setup.py install
 
 
-cd $DIR 
+cd $SRC 
 tar zxvf jsoncpp-src-0.5.0.tar.gz
 cd ./jsoncpp-src-0.5.0
 scons platform=linux-gcc
@@ -76,12 +76,12 @@ make && make install
 
 
 # install  mysql connector c++
-cd $DIR 
+cd $SRC 
 tar zxvf mysql-connector-c++-1.1.12-linux-glibc2.12-x86-64bit.tar.gz
 cd mysql-connector-c++-1.1.12-linux-glibc2.12-x86-64bit
 cd include 
 cp -rn * /usr/local/include
-cd $DIR/mysql-connector-c++-1.1.12-linux-glibc2.12-x86-64bit/lib
+cd $SRC/mysql-connector-c++-1.1.12-linux-glibc2.12-x86-64bit/lib
 cp * /usr/local/lib
 cd  /usr/local/lib/
 rm -rf libmysqlcppconn.so
@@ -91,7 +91,7 @@ ln -s libmysqlcppconn.so.7 libmysqlcppconn.so
 ldconfig 
 
 #install redis 
-cd $DIR 
+cd $SRC 
 tar zxvf redis-5.0.3.tar.gz
 cd redis-5.0.3
 make && make install  PREFIX=/usr/local/redis
@@ -101,17 +101,19 @@ cp redis.conf /usr/local/redis/conf
 sed -i 's/^daemonize no/daemonize yes/g' /usr/local/redis/conf/redis.conf
 
 #set redis autorun 
-cp $DIR/redis /etc/init.d/redis
+cp $SRC/redis /etc/init.d/redis
 chmod 755 /etc/init.d/redis #设置文件redis的权限，让Linux可以执行
 chkconfig redis on    #开启服务自启动
 chkconfig --list      #查看所有注册的脚本文件
 service redis start  #启动
 
 #install redis c++ lib 
-cd $DIR 
+cd $SRC 
 rpm -ivh epel-release-latest-7.noarch.rpm
 yum install hiredis-devel -y 
 ldconfig 
-
+ 
 echo "export LD_LIBRARY_PATH=/root/autotrader/lib:\$LD_LIBRARY_PATH" >> /root/.bash_profile
 source /root/.bash_profile
+
+cp -r *  $SRC/quant/trunk/autotrader /root/
