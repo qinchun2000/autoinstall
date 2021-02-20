@@ -32,7 +32,8 @@ yum -y install perl-CPAN
 yum -y install perl-JSON
 yum -y install ncurses-compat-libs
 yum -y install net-tools 
-cd mysql
+
+cd $SRC/mysql
 rpm -ivh *.rpm 
 systemctl start mysqld.service  
 systemctl status mysqld.service
@@ -116,4 +117,3 @@ ldconfig
 echo "export LD_LIBRARY_PATH=/root/autotrader/lib:\$LD_LIBRARY_PATH" >> /root/.bash_profile
 source /root/.bash_profile
 
-cp -r *  $SRC/quant/trunk/autotrader /root/
