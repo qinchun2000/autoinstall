@@ -1,3 +1,8 @@
+#!/bin/sh
+# chkconfig: 345 80 90
+# description:This is a redis server, config file path is /usr/local/redis/conf/redis.conf
+
+
 PATH=/usr/local/bin:/sbin:/usr/bin:/bin
 
 REDISPORT=6379 #实际环境而定
