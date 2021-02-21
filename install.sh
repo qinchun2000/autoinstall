@@ -69,7 +69,8 @@ ln /lib/libjson_linux-gcc-4.8.5_libmt.so /lib/libjson.so
 mv include/json/ /usr/include/
 ldconfig
 ./bin/linux-gcc-4.8.5/test_lib_json
-cd /root/install
+
+cd $SRC 
 tar -zxvf log4cplus-2.0.5.tar.gz
 cd log4cplus-2.0.5/
 ./configure
@@ -102,7 +103,8 @@ cp redis.conf /usr/local/redis/conf
 sed -i 's/^daemonize no/daemonize yes/g' /usr/local/redis/conf/redis.conf
 
 #set redis autorun 
-cp $SRC/redis /etc/init.d/redis
+cd $DIR
+cp redis /etc/init.d/redis
 chmod 755 /etc/init.d/redis #设置文件redis的权限，让Linux可以执行
 chkconfig redis on    #开启服务自启动
 chkconfig --list      #查看所有注册的脚本文件
