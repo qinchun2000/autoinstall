@@ -2,6 +2,12 @@
 
 DIR="$( cd "$( dirname "$0"  )" && pwd  )"
 SRC="/root/package"
+if [ ! -d $SRC ];then
+  tar zxvf /root/package*.tar.gz -C /root 
+  else
+  echo "文件夹已经存在"
+fi
+
 timedatectl set-timezone Asia/Shanghai
 yum install ntpdate -y
 ntpdate -u 1.cn.pool.ntp.org
