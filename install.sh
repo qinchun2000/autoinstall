@@ -53,6 +53,7 @@ pip3 install pickle5
 pip3 install python_struct
 pip3 install jqdatasdk
 pip3 install mysqlclient
+pip3 install pyaml 
 
 ### config mysql root password 111111
 $DIR/config.py
